@@ -20,11 +20,11 @@ Infrastruktura została podzielona na logiczne strefy bezpieczeństwa zarządzan
 
 ## 📸 Wizualizacja i Galeria
 ### Topologia sieci
-![Topologia sieci](img/Topologia.png)
+[Topologia sieci](img/Topologia.png)
 *Opis: Schemat logiczny sieci zaprojektowany i wdrożony w środowisku Proxmox VE.*
 
 ### Struktura Active Directory
-![Struktura organizacji](img/Struktura%20organizacji.png)
+[Struktura organizacji](img/Struktura%20organizacji.png)
 *Opis: Hierarchia jednostek organizacyjnych (OU) wdrożona w Windows Server 2025.*
 
 ## 🛡️ Kluczowe funkcjonalności
