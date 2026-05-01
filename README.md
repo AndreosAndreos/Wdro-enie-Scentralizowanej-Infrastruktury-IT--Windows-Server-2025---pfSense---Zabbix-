@@ -9,6 +9,7 @@ Sercem projektu jest hiperwizor **Proxmox VE**, na którym uruchomiono odizolowa
 * **Wirtualizacja:** Proxmox VE (Bare-metal).
 * **Usługi Katalogowe:** Windows Server 2025 Datacenter (Główny oraz dodatkowy kontroler domeny).
 * **Sieć i Bezpieczeństwo:** pfSense 2.7.2, system IDS/IPS Suricata, VPN (Tailscale oraz OpenVPN).
+* **Dostęp zdalny i Uwierzytelnianie:** Uruchomienie bezpiecznych tuneli VPN (OpenVPN) zintegrowanych z usługą RADIUS (rola NPAS na Windows Server 2025). Pozwala to na centralne zarządzanie uprawnieniami dostępu zdalnego bezpośrednio z poziomu kont użytkowników w Active Directory.
 * **Monitoring:** Zabbix 7.4 (SNMP & Agenci) zainstalowany na systemie Ubuntu Server 22.04.
 
 ## 🌐 Projekt sieci
@@ -19,13 +20,23 @@ Infrastruktura została podzielona na logiczne strefy bezpieczeństwa zarządzan
 * **Monitoring (192.168.60.0/24):** Wydzielona sieć przeznaczona dla serwera monitorującego Zabbix.
 
 ## 📸 Wizualizacja i Galeria
-### Topologia sieci
-[Topologia sieci](img/Topologia.png)
-*Opis: Schemat logiczny sieci zaprojektowany i wdrożony w środowisku Proxmox VE.*
 
-### Struktura Active Directory
-[Struktura organizacji](img/Struktura%20organizacji.png)
-*Opis: Hierarchia jednostek organizacyjnych (OU) wdrożona w Windows Server 2025.*
+### ☁️ Środowisko Wirtualizacji
+* [Widok węzła Proxmox VE z listą maszyn wirtualnych](img/Proxmox_infrastruktora.png)
+  * *Opis: Zarządzanie zasobami obliczeniowymi w oparciu o hiperwizor Proxmox VE. Widoczna separacja ról serwerowych oraz maszyn klienckich Windows 11.*
+
+### 🌐 Architektura Sieci i AD
+* [Topologia sieci (Schemat logiczny)](img/Topologia.png)
+* [Struktura Jednostek Organizacyjnych w Active Directory](img/Struktura%20organizacji.png)
+
+### 🔧 Konfiguracja Systemowa i Bezpieczeństwo
+* [Aktywne role serwerowe (AD DS, DHCP, DNS, IIS, NPAS)](img/MainServer.png)
+* [Wykaz wdrożonych obiektów zasad grupy (GPO)](img/GPO.png)
+* [Konfiguracja reguł Firewall dla segmentu DMZ w pfSense](img/DMZrules.png)
+  * *Opis: Dokumentacja konfiguracji ról, polityk bezpieczeństwa (np. blokada USB) oraz segmentacji ruchu.*
+
+### 🖥️ Monitoring i Operacje
+* [Mapa logiczna infrastruktury w systemie Zabbix 7.4](img/Mapa%20logiczna%20-%20zabbix.png)
 
 ## 🛡️ Kluczowe funkcjonalności
 * **Active Directory:** Zaprojektowanie pełnej struktury jednostek organizacyjnych (OU), zarządzanie grupami oraz wdrożenie polityk GPO (mapowanie dysków, standaryzacja i hardening systemów).
