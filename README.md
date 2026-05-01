@@ -1,4 +1,4 @@
-# Wdrożenie Scentralizowanej Infrastruktury IT (Windows Server 2025 & pfSense)
+# Wdrożenie Scentralizowanej Infrastruktury IT (Windows Server 2025 & pfSense & Zabbix)
 
 ## 📌 O projekcie
 Kompleksowe wdrożenie scentralizowanego środowiska IT dla przedsiębiorstwa, zrealizowane jako projekt inżynierski na Państwowej Akademii Nauk Stosowanych w Nysie. System integruje nowoczesne usługi katalogowe Microsoft z otwartoźródłowymi rozwiązaniami z zakresu cyberbezpieczeństwa oraz monitoringu.
@@ -7,9 +7,10 @@ Kompleksowe wdrożenie scentralizowanego środowiska IT dla przedsiębiorstwa, z
 Sercem projektu jest hiperwizor **Proxmox VE**, na którym uruchomiono odizolowane segmenty sieci w celu zapewnienia maksymalnego bezpieczeństwa.
 
 * **Wirtualizacja:** Proxmox VE (Bare-metal).
-* **Usługi Katalogowe:** Windows Server 2025 Datacenter (Główny oraz dodatkowy kontroler domeny).
+* **Usługi Katalogowe:** Windows Server 2025 Datacenter w konfiguracji **High Availability** (Główny oraz dodatkowy kontroler domeny z pełną replikacją AD/DNS/DHCP).
 * **Sieć i Bezpieczeństwo:** pfSense 2.7.2, system IDS/IPS Suricata, VPN (Tailscale oraz OpenVPN).
-* **Dostęp zdalny i Uwierzytelnianie:** Uruchomienie bezpiecznych tuneli VPN (OpenVPN) zintegrowanych z usługą RADIUS (rola NPAS na Windows Server 2025). Pozwala to na centralne zarządzanie uprawnieniami dostępu zdalnego bezpośrednio z poziomu kont użytkowników w Active Directory.
+* **Dostęp zdalny i Uwierzytelnianie:** Uruchomienie bezpiecznych tuneli VPN (OpenVPN) zintegrowanych z usługą **RADIUS (rola NPAS)** na Windows Server 2025. Pozwala to na centralne zarządzanie uprawnieniami dostępu zdalnego bezpośrednio z kont w Active Directory.
+* **Usługi Webowe:** Serwer **IIS (Internet Information Services)** wdrożony w strefie DMZ do hostowania zasobów wewnętrznych.
 * **Monitoring:** Zabbix 7.4 (SNMP & Agenci) zainstalowany na systemie Ubuntu Server 22.04.
 
 ## 🌐 Projekt sieci
@@ -39,10 +40,11 @@ Infrastruktura została podzielona na logiczne strefy bezpieczeństwa zarządzan
 * [Mapa logiczna infrastruktury w systemie Zabbix 7.4](img/Mapa%20logiczna%20-%20zabbix.png)
 
 ## 🛡️ Kluczowe funkcjonalności
-* **Active Directory:** Zaprojektowanie pełnej struktury jednostek organizacyjnych (OU), zarządzanie grupami oraz wdrożenie polityk GPO (mapowanie dysków, standaryzacja i hardening systemów).
-* **Ochrona sieci:** Konfiguracja reguł firewalla na pfSense oraz implementacja systemu IDS/IPS Suricata do wykrywania i blokowania ataków w czasie rzeczywistym.
-* **Dostęp zdalny:** Uruchomienie bezpiecznych tuneli VPN opartych na protokołach WireGuard (Tailscale) oraz SSL/TLS (OpenVPN) dla pracowników zdalnych.
-* **Monitoring i Analityka:** Dashboardy Zabbix monitorujące kluczowe usługi (AD, DNS, DHCP) oraz wydajność sprzętową i dostępność maszyn wirtualnych.
+* **Wysoka dostępność (HA):** Mechanizm replikacji bazy AD oraz failover usług DHCP/DNS pomiędzy dwoma kontrolerami domeny.
+* **Active Directory:** Pełna struktura OU, zarządzanie grupami oraz zaawansowane polityki GPO (hardening systemów, mapowanie zasobów).
+* **Ochrona sieci:** Implementacja systemu IDS/IPS Suricata oraz precyzyjne filtrowanie ruchu wychodzącego (Egress Filtering) w strefie DMZ.
+* **Remote Access:** Bezpieczne tunele VPN oparte na protokołach WireGuard (Tailscale) oraz SSL/TLS (OpenVPN) z autoryzacją RADIUS.
+* **Observability:** Centralny monitoring Zabbix śledzący wydajność maszyn oraz dostępność krytycznych usług systemowych.
 
 ## 📁 Dokumentacja
 Pełna dokumentacja techniczna projektu w formacie PDF znajduje się w folderze `/doc`.
